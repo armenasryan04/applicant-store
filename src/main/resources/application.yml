@@ -1,0 +1,15 @@
+spring:
+  application:
+  name: collect-CVs-from-google-drive
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ais
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    contexts: dev
+    change-log: /liquibase/master.xml

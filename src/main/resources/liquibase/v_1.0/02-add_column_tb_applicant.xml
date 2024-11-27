@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet author="Armen" id="APPSTORE-1878-applicant-tables">
+        <addColumn tableName="tb_applicant">
+            <column name="google_link" type="VARCHAR(100)" remarks="Ссылка на резюме"/>
+        </addColumn>
+
+        <comment>Add the Google_link column to tb_applicant</comment>
+    </changeSet>
+</databaseChangeLog>

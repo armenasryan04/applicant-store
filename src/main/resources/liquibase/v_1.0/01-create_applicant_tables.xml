@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet author="Armen" id="APPSTORE-1878-applicant-tables">
+        <createTable tableName="tb_applicant" remarks="Соискатель">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="state" type="VARCHAR(50)" remarks="Статус">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(100)" remarks="Фамилия"/>
+            <column name="name" type="VARCHAR(100)" remarks="Имя"/>
+            <column name="patronym" type="VARCHAR(100)" remarks="Отчество"/>
+            <column name="date_birth" type="DATE" remarks="Дата рождения"/>
+            <column name="gender" type="VARCHAR(50)" remarks="Пол"/>
+            <column name="salary" type="NUMBER" remarks="Заработная плата"/>
+            <column name="currency" type="VARCHAR(100)" remarks="Валюта"/>
+            <column name="country" type="VARCHAR(100)" remarks="Страна"/>
+            <column name="region" type="VARCHAR(100)" remarks="Регион"/>
+            <column name="city" type="VARCHAR(100)" remarks="Город"/>
+            <column name="grade" type="VARCHAR(100)" remarks="Грейд"/>
+            <column name="position" type="VARCHAR(100)" remarks="Должность"/>
+            <column name="relocation" type="VARCHAR(100)" remarks="Готовность к переезду"/>
+            <column name="is_business_trip" type="VARCHAR(50)" remarks="Готовность к командировкам"/>
+            <column name="comment" type="VARCHAR(1000)" remarks="Комментарий"/>
+            <column name="date_update" type="DATE" remarks="Дата обновления резюме в hh"/>
+            <column name="type_link" type="VARCHAR(50)" remarks="Тип создания записи"/>
+            <column name="work_permit" type="BOOLEAN" remarks="Разрешение на работу"/>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+            <column name="time_delete" type="DATETIME" remarks="Дата удаления"/>
+            <column name="is_viewed" type="BOOLEAN" remarks="Признак просмотра карточки"/>
+            <column name="date_view" type="DATETIME" remarks="Дата просмотра"/>
+            <column name="version" type="INTEGER" remarks="Версия">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="tb_applicant_skill" remarks="Навык соискателя">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_applicant_skill.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="skill_name" type="VARCHAR(250)" remarks="Навык">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+
+        <createTable tableName="tb_applicant_nationality" remarks="Гражданство соискателя">
+            <column name="id" type="VARCHAR(128)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_applicant_nationality.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="nationality" type="VARCHAR(100)" remarks="Гражданство">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+
+        <createTable tableName="tb_applicant_language" remarks="Язык">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_language.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="attribute" type="VARCHAR(50)" remarks="Признак языка"/>
+            <column name="language" type="VARCHAR(50)" remarks="Язык">
+                <constraints nullable="false"/>
+            </column>
+            <column name="level" type="VARCHAR(50)" remarks="Уровень языка">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+
+        <createTable tableName="tb_applicant_contact" remarks="Контакт">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_contact.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="contact_type" type="VARCHAR(100)" remarks="Тип контакта">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(100)" remarks="Значение">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+
+        <createTable tableName="tb_applicant_education" remarks="Образование">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_education.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="education_type" type="VARCHAR(50)" remarks="Тип образования"/>
+            <column name="university_name" type="VARCHAR(500)" remarks="Наименование университета"/>
+            <column name="faculty" type="VARCHAR(500)" remarks="Факультет"/>
+            <column name="specialization" type="VARCHAR(500)" remarks="Специализация"/>
+            <column name="organization" type="VARCHAR(500)" remarks="Проводившая организация"/>
+            <column name="method" type="VARCHAR(50)" remarks="Способ получения образования"/>
+            <column name="end_year" type="INT" remarks="Год окончания"/>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+
+        <createTable tableName="tb_applicant_employment" remarks="Занятость">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_employment.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="employment_type" type="VARCHAR(50)" remarks="Тип занятости">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+
+        <createTable tableName="tb_applicant_experience" remarks="Опыт работы">
+            <column name="id" type="VARCHAR(128)" remarks="Идентификатор записи">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="id_applicant" type="VARCHAR(128)" remarks="Идентификатор записи таблицы «Соискатель»">
+                <constraints nullable="false" foreignKeyName="tb_experience.id_applicant.fk"
+                             references="tb_applicant(id)"/>
+            </column>
+            <column name="start_date" type="DATE" remarks="Дата начала"/>
+            <column name="end_date" type="DATE" remarks="Дата окончания "/>
+            <column name="company_name" type="VARCHAR(250)" remarks="Название компании">
+                <constraints nullable="false"/>
+            </column>
+            <column name="site" type="VARCHAR(100)" remarks="Веб сайт"/>
+            <column name="activity" type="CLOB" remarks="Направление деятельности"/>
+            <column name="position" type="VARCHAR(250)" remarks="Должность"/>
+            <column name="description" type="VARCHAR(2500)" remarks="Описание обязанностей"/>
+            <column name="time_create" type="DATETIME" remarks="Дата создания">
+                <constraints nullable="false"/>
+            </column>
+            <column name="time_update" type="DATETIME" remarks="Дата изменения"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
