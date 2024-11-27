@@ -1,14 +1,13 @@
 package com.samplemission.collectcvsfromgoogledrive.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -17,11 +16,10 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "tb_applicant")
-public class Applicant {
-    @Id
-    @Column(name = "id", nullable = false, length = 128)
-    private UUID id;
-
+@EqualsAndHashCode(callSuper = true)
+public class Applicant extends SoftDeletionEntity implements ResponsibleRelationship{
+    @Type(type="uuid-char")
+    private UUID responsibleHrId;
     @Column(name = "state", nullable = false, length = 50)
     private String state;
 
@@ -33,9 +31,6 @@ public class Applicant {
 
     @Column(name = "patronym", length = 100)
     private String patronym;
-
-    @Column(name = "date_birth")
-    private LocalDate dateBirth;
 
     @Column(name = "gender", length = 50)
     private String gender;
@@ -70,23 +65,11 @@ public class Applicant {
     @Column(name = "comment", length = 1000)
     private String comment;
 
-    @Column(name = "date_update")
-    private LocalDate dateUpdate;
-
     @Column(name = "type_link", length = 50)
     private String typeLink;
 
     @Column(name = "work_permit")
     private Boolean workPermit;
-
-    @Column(name = "time_create", nullable = false)
-    private Instant timeCreate;
-
-    @Column(name = "time_update")
-    private Instant timeUpdate;
-
-    @Column(name = "time_delete")
-    private Instant timeDelete;
 
     @Column(name = "is_viewed")
     private Boolean isViewed;
@@ -99,5 +82,42 @@ public class Applicant {
 
     @Column(name = "google_link", length = 100)
     private String googleLink;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = ApplicantContact_.ID_APPLICANT, updatable = false, insertable = false)
+    private List<ApplicantContact> contacts = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = ApplicantEducation_.ID_APPLICANT, updatable = false, insertable = false)
+    private List<ApplicantEducation> educations = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = ApplicantEmployment_.ID_APPLICANT, updatable = false, insertable = false)
+    private List<ApplicantEmployment> employments = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = ApplicantExperience_.ID_APPLICANT, updatable = false, insertable = false)
+    private List<ApplicantExperience> experiences = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = ApplicantLanguage_.ID_APPLICANT, updatable = false, insertable = false)
+    private List<ApplicantLanguage> languages = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = ApplicantSkill_.ID_APPLICANT, updatable = false, insertable = false)
+    private List<ApplicantSkill> skills = new ArrayList<>();
+
 
 }

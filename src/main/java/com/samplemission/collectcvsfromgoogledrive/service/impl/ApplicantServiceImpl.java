@@ -10,7 +10,7 @@ import java.util.UUID;
 public class ApplicantServiceImpl implements ApplicantService {
     @Override
     public ResponseEntity<Applicant> save() {
-
+return null;
     }
 
     @Override

@@ -1,36 +1,22 @@
 package com.samplemission.collectcvsfromgoogledrive.model.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true ,onlyExplicitlyIncluded = true)
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "tb_applicant_contact")
-public class ApplicantContact {
-    @Id
-    @Column(name = "id", nullable = false, length = 128)
-    private UUID id;
+public class ApplicantContact extends AuditableEntity implements ApplicantRelationship{
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_applicant", nullable = false)
-    private Applicant idApplicant;
-
-    @Column(name = "contact_type", nullable = false, length = 100)
+    @Type(type="uuid-char")
+    private UUID idApplicant;
     private String contactType;
-
-    @Column(name = "value", nullable = false, length = 100)
+    @Column(name = "`value`", nullable = false, length = 100)
     private String value;
-
-    @Column(name = "time_create", nullable = false)
-    private Instant timeCreate;
-
-    @Column(name = "time_update")
-    private Instant timeUpdate;
 
 }

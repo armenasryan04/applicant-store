@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet author="Armen" id="APPSTORE-1878-applicant-tables">
+        <addColumn tableName="tb_applicant">
+            <column name="responsible_hr_id" type="VARCHAR(100)" remarks="ответственный">
+                <constraints nullable="false" foreignKeyName="tb_applicant.id_responsible_hr.fk"
+                             references="tb_responsible_hr(id)"/>
+            </column>
+        </addColumn>
+
+        <comment>Add Responsible to the Applicant</comment>
+    </changeSet>
+</databaseChangeLog>

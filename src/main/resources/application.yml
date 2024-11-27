@@ -1,5 +1,6 @@
 spring:
   application:
+
   name: collect-CVs-from-google-drive
   datasource:
     url: jdbc:postgresql://localhost:5432/ais
@@ -13,3 +14,7 @@ spring:
   liquibase:
     contexts: dev
     change-log: /liquibase/master.xml
+
+jwt:
+ secret: Z3RoZGhAbCFMYU56elFq
+ expiration: 600000
