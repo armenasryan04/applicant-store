@@ -13,10 +13,8 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "tb_applicant_language")
+@EqualsAndHashCode(callSuper = true ,onlyExplicitlyIncluded = true)
 public class ApplicantLanguage extends AuditableEntity implements ApplicantRelationship {
-    @Id
-    @Column(name = "id", nullable = false, length = 128)
-    private UUID id;
 
     @Type(type="uuid-char")
     private UUID idApplicant;

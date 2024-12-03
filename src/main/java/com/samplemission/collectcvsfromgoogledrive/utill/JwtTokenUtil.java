@@ -85,11 +85,14 @@ public class JwtTokenUtil {
                 .compact();
     }
 
-    public Boolean validateToken(String token, String email) {
+    public Boolean validateToken(String token, String login ) {
 
-        final String username = getUsernameFromToken(token);
+        final String usernameFromToken = getUsernameFromToken(token);
+        String [] emailAndLogin = login.split(" ");
+        String email = emailAndLogin[0];
+        String username = emailAndLogin[1];
         return (
-                username.equals(email)
+                usernameFromToken.equals(email) || usernameFromToken.equals(username)
                         && !isTokenExpired(token));
     }
 

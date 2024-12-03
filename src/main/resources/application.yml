@@ -16,5 +16,5 @@ spring:
     change-log: /liquibase/master.xml
 
 jwt:
- secret: Z3RoZGhAbCFMYU56elFq
+ secret: YXNkZmYkIyNzZFNEU0RBQVNERksjQEBkc2ZqZGZrZHNqQEAjZHNmZ2ZnZmdeXiYmWipeJSQkI2RzZHMkIyVzZDQ1MDk5KUkjJCg5V0ZTSUo=
  expiration: 600000

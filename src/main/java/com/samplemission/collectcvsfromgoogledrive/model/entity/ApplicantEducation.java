@@ -14,6 +14,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "tb_applicant_education")
+@EqualsAndHashCode(callSuper = true ,onlyExplicitlyIncluded = true)
 public class ApplicantEducation extends AuditableEntity implements ApplicantRelationship{
 
     @Type(type="uuid-char")

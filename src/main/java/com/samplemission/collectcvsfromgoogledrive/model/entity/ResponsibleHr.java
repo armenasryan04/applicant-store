@@ -15,7 +15,7 @@ import java.util.UUID;
 @Builder
 @Entity
 @Table(name = "tb_responsible_hr")
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true ,onlyExplicitlyIncluded = true)
 public class ResponsibleHr extends PersistableEntity {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
@@ -36,10 +36,14 @@ public class ResponsibleHr extends PersistableEntity {
     @Enumerated(EnumType.STRING)
     private HrRole role;
 
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JoinColumn(name = Applicant_.RESPONSIBLE_HR_ID, updatable = false, insertable = false)
     private List<Applicant> applicants = new ArrayList<>();
+
+    public String getLogin()  {
+        return this.email + " " + this.username;
+    }
 
 }

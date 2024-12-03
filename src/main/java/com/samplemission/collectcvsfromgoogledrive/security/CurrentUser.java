@@ -7,7 +7,7 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     private ResponsibleHr responsibleHr;
 
     public CurrentUser(ResponsibleHr user) {
-        super(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getRole().getRoleDescription()));
+        super(user.getLogin(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getRole().getRoleDescription()));
         this.responsibleHr = user;
     }
     public ResponsibleHr getUser() {
