@@ -11,5 +11,7 @@ public interface GoogleDriveService {
     InputStream downloadFile(String fileId) throws IOException;
     // Получаем имя файла
     String getFileName(String fileId) throws IOException;
+    // получаем id по имени
+    String getFileIdByName(String fileName) throws IOException;
 
 }

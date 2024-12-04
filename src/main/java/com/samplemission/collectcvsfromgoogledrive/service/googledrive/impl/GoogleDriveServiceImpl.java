@@ -31,7 +31,7 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
                 .execute();
 
         for (File file : result.getFiles()) {
-            googleDriveFiles.add(file.getId());
+            googleDriveFiles.add(file.getName());
         }
         return googleDriveFiles;
     }
@@ -42,5 +42,19 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
 
     public String getFileName(String fileId) throws IOException {
         return driveService.files().get(fileId).setFields("name").execute().getName();
+    }
+
+    public String getFileIdByName(String fileName) throws IOException {
+        FileList result = driveService.files().list()
+                .setQ(String.format("name='%s' and trashed=false", fileName)) // Ищем файл с заданным именем, не в корзине
+                .setFields("files(id, name)") // Указываем, что нам нужно ID и имя
+                .execute();
+
+        for (File file : result.getFiles()) {
+            if (fileName.equals(file.getName())) {
+                return file.getId(); // Возвращаем ID первого найденного файла
+            }
+        }
+        return null; // Если файл не найден, возвращаем null
     }
 }
