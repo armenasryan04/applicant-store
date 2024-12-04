@@ -16,5 +16,19 @@ spring:
     change-log: /liquibase/master.xml
 
 jwt:
- secret: YXNkZmYkIyNzZFNEU0RBQVNERksjQEBkc2ZqZGZrZHNqQEAjZHNmZ2ZnZmdeXiYmWipeJSQkI2RzZHMkIyVzZDQ1MDk5KUkjJCg5V0ZTSUo=
- expiration: 600000
+  secret: YXNkZmYkIyNzZFNEU0RBQVNERksjQEBkc2ZqZGZrZHNqQEAjZHNmZ2ZnZmdeXiYmWipeJSQkI2RzZHMkIyVzZDQ1MDk5KUkjJCg5V0ZTSUo=
+  expiration: 600000
+google:
+  drive:
+    folder:
+      id: 1dWy-uqSYxJ2QelrDox_6oAAOHhxocdbT
+  cloud:
+    credentials:
+      path: C:\\credentials\\credentials.json
+
+minio:
+  bucketName: ais
+  endpoint: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+

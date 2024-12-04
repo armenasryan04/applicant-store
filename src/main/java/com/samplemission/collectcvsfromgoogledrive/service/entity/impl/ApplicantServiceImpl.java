@@ -1,7 +1,7 @@
-package com.samplemission.collectcvsfromgoogledrive.service.impl;
+package com.samplemission.collectcvsfromgoogledrive.service.entity.impl;
 
 import com.samplemission.collectcvsfromgoogledrive.model.entity.Applicant;
-import com.samplemission.collectcvsfromgoogledrive.service.ApplicantService;
+import com.samplemission.collectcvsfromgoogledrive.service.entity.ApplicantService;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
