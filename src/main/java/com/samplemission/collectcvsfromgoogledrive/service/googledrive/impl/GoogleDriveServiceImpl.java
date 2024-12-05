@@ -31,7 +31,7 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
                 .execute();
 
         for (File file : result.getFiles()) {
-            googleDriveFiles.add(file.getName());
+            googleDriveFiles.add(file.getId());
         }
         return googleDriveFiles;
     }
