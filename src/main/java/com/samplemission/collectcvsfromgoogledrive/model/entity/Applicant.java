@@ -5,7 +5,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -17,8 +19,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_applicant")
 @EqualsAndHashCode(callSuper = true)
-public class Applicant extends SoftDeletionEntity implements ResponsibleRelationship{
-    @Type(type="uuid-char")
+public class Applicant extends SoftDeletionEntity implements ResponsibleRelationship {
+    @Type(type = "uuid-char")
     private UUID responsibleHrId;
     @Column(name = "state", nullable = false, length = 50)
     private String state;
@@ -36,7 +38,7 @@ public class Applicant extends SoftDeletionEntity implements ResponsibleRelation
     private String gender;
 
     @Column(name = "salary")
-    private BigDecimal salary;
+    private BigInteger salary;
 
     @Column(name = "currency", length = 100)
     private String currency;
@@ -76,6 +78,9 @@ public class Applicant extends SoftDeletionEntity implements ResponsibleRelation
 
     @Column(name = "date_view")
     private Instant dateView;
+
+    @Column(name = "date_birth")
+    private LocalDate dateBirth;
 
     @Column(name = "version", nullable = false)
     private Integer version;

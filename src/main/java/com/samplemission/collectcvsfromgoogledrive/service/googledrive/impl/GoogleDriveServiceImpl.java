@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,18 +23,16 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
 
 
     public Set<String> getGoogleDriveFiles() throws IOException {
-        Set<String> googleDriveFiles = new HashSet<>();
 
         FileList result = driveService.files().list()
                 .setQ(String.format("'%s' in parents and trashed = false", folderId))
                 .setPageSize(1000) // Ограничение на количество файлов
                 .setFields("files(id, name)") // Указываем, что хотим получать id и имя
                 .execute();
+        return result.getFiles().stream()
+                .map(File::getId)
+                .collect(Collectors.toSet());
 
-        for (File file : result.getFiles()) {
-            googleDriveFiles.add(file.getId());
-        }
-        return googleDriveFiles;
     }
 
     public InputStream downloadFile(String fileId) throws IOException {
@@ -49,12 +48,9 @@ public class GoogleDriveServiceImpl implements GoogleDriveService {
                 .setQ(String.format("name='%s' and trashed=false", fileName)) // Ищем файл с заданным именем, не в корзине
                 .setFields("files(id, name)") // Указываем, что нам нужно ID и имя
                 .execute();
-
-        for (File file : result.getFiles()) {
-            if (fileName.equals(file.getName())) {
-                return file.getId(); // Возвращаем ID первого найденного файла
-            }
-        }
-        return null; // Если файл не найден, возвращаем null
+        return result.getFiles().stream()
+                .findFirst()
+                .map(File::getId)
+                .orElse(null);
     }
-}
+    }

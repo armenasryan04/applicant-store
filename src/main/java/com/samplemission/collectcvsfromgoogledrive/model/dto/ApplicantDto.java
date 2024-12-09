@@ -5,8 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -19,7 +21,8 @@ public class ApplicantDto {
     private String name;
     private String patronym;
     private String gender;
-    private BigDecimal salary;
+    private BigInteger salary;
+    private LocalDate dateBirth;
     private String currency;
     private String country;
     private String region;
@@ -32,12 +35,15 @@ public class ApplicantDto {
     private String typeLink;
     private Boolean workPermit;
     private Boolean isViewed;
-    private Instant dateView;
+    private LocalDateTime dateView;
     private Integer version;
     private NationalityDto nationality;
     private String googleLink;
     private List<ContactDto> contacts;
-    private List<EducationDto> educations;
+    private List<EducationDto> education;
+    private List<LanguageDto> languages;
     private List<EmploymentDto> employments;
+    private List<SkillDto> skills;
+    private List<NationalityDto> nationalities;
     private List<ExperienceDto> experiences;
 }

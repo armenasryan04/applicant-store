@@ -37,6 +37,7 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST, "/user/auth").permitAll()
+                .antMatchers(HttpMethod.GET, "/parse-files").permitAll()
                 .antMatchers(HttpMethod.POST, "/user/register").permitAll()
                 .antMatchers(HttpMethod.GET,"/user/responsible").authenticated()
                 .anyRequest().authenticated();

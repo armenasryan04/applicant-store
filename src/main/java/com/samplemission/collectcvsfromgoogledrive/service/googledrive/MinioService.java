@@ -21,4 +21,6 @@ public interface MinioService {
 
     // Загрузка файла в MinIO
     void uploadFile(String fileName, InputStream inputStream) throws Exception;
+
+    InputStream downloadFile(String fileName) throws Exception;
 }
