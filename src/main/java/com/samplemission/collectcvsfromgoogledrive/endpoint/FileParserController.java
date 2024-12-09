@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FileParserController {
 
-
     @GetMapping("/parse-files")
     public ApplicantDto parseFiles() throws Exception {
         ApplicantDto applicantDto = new ApplicantDto();
